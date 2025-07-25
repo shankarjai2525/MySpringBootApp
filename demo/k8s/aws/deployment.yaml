@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-springboot-app
+  namespace: my-project
+  labels:
+    app: my-springboot-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-springboot-app
+  template:
+    metadata:
+      labels:
+        app: my-springboot-app
+    spec:
+      containers:
+      - envFrom:
+        - secretRef:
+            name: nexus-pullsecret
+        name: springboot-container
+        image: "jgothan/springboot:1.0"
+        ports:
+        - containerPort: 8080
+        resources:
+          limits:
+            cpu: "1"
+            memory: 512Mi
+          requests:
+            cpu: 200m
+            memory: 256Mi
