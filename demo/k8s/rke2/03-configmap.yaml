@@ -1,7 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: my-config
-  namespace: my-project-1
-data:
-  MY_CUSTOM_VARIABLE: "Hello from ConfigMap"
